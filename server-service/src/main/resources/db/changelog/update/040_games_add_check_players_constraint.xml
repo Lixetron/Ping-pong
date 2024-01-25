@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog logicalFilePath="db.changelog/update/040_games_add_check_players_constraint.xml"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet id="040_games_add_check_players_constraint" author="Dmitry Khlopchenko">
+
+        <sql>
+            ALTER TABLE games
+            ADD CONSTRAINT different_players_check
+            CHECK (first_player_id != second_player_id)
+        </sql>
+
+        <rollback>
+            <sql>
+                ALTER TABLE games
+                DROP CONSTRAINT different_players_check
+            </sql>
+        </rollback>
+
+    </changeSet>
+</databaseChangeLog>

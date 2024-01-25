@@ -1,0 +1,12 @@
+@if(gameUid) {
+  <app-field [uid]="gameUid"></app-field>
+} @else {
+  <div class="flex flex-col items-center justify-center h-full">
+    <mat-form-field class="mb-3">
+      <mat-label>Nickname</mat-label>
+      <input matInput [(ngModel)]="player"/>
+    </mat-form-field>
+    <button mat-stroked-button color="primary" (click)="createGame()" class="mb-5">Create Game</button>
+    <button mat-stroked-button color="primary" (click)="findRandomGame()">Find Random Game</button>
+  </div>
+}

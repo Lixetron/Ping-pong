@@ -1,0 +1,17 @@
+<div class="w-full h-full text-white relative" #field>
+
+  <div class="text-5xl font-bold right-1/2 absolute text-amber-700 z-0">
+    {{score.x}} - {{score.y}}
+    <br>
+    <ng-container *ngIf="(youAreFirstPlayer && score.x >= 10) || (!youAreFirstPlayer && score.y >= 10)">
+      YOU WIN
+    </ng-container>
+    <ng-container *ngIf="(youAreFirstPlayer && score.y >= 10) || (!youAreFirstPlayer && score.x >= 10)">
+      YOU LOOSE
+    </ng-container>
+
+  </div>
+  <div class="transition absolute bg-white rounded w-3 h-1/5 z-10" #player></div>
+  <div class="transition bg-white rounded w-3 h-1/5 z-10" [ngClass]="secondPlayerJoined ? 'absolute' : 'hidden'" #secondPlayer></div>
+  <div class="transition-all transform-cpu bg-white rounded-full w-3 h-3 z-10" [ngClass]="secondPlayerJoined ? 'absolute' : 'hidden'" #ball></div>
+</div>

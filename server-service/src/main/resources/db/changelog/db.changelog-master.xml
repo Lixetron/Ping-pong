@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog logicalFilePath="db.changelog/db.changelog-master.xml"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <property dbms="postgresql,h2"/>
+
+    <include file="scheme/db.changelog-scheme.xml" relativeToChangelogFile="true"/>
+    <include file="update/db.changelog-update.xml" relativeToChangelogFile="true"/>
+    <include file="data/db.changelog-data.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>

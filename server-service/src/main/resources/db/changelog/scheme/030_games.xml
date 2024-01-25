@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog logicalFilePath="db.changelog/scheme/030_games.xml"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet id="030_games" author="Dmitry Khlopchenko">
+
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="games"/>
+            </not>
+        </preConditions>
+
+        <comment>Create table "games"</comment>
+
+        <createTable tableName="games" remarks="Games">
+            <column name="id" type="bigint" remarks="id" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="games_pkey"/>
+            </column>
+            <column name="created_date" type="timestamp" remarks="created at">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uid" type="text" remarks="uid">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="text" remarks="status">
+                <constraints nullable="false"/>
+            </column>
+            <column name="winner" type="bigint"/>
+            <column name="first_player_id" type="bigint" remarks="creator">
+                <constraints nullable="false"/>
+            </column>
+            <column name="second_player_id" type="bigint" remarks="second player"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="games"
+                                 baseColumnNames="first_player_id"
+                                 constraintName="games_players_first_player_fk"
+                                 referencedTableName="players"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="games"
+                                 baseColumnNames="second_player_id"
+                                 constraintName="games_players_second_player_fk"
+                                 referencedTableName="players"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="games"
+                                 baseColumnNames="winner"
+                                 constraintName="games_players_winner_fk"
+                                 referencedTableName="players"
+                                 referencedColumnNames="id"/>
+
+        <rollback>
+            <dropTable tableName="games"/>
+        </rollback>
+
+    </changeSet>
+</databaseChangeLog>
